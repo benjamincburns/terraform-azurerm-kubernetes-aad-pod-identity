@@ -39,6 +39,7 @@ resource "helm_release" "aad_pod_identity" {
 }
 
 module "identity" {
+  depends_on = [ helm_release.aad_pod_identity ]
   source   = "./identity"
   for_each = (var.identities == null ? {} : var.identities)
 
